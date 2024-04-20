@@ -1,0 +1,17 @@
+def count_word_in_html(word, html_file):
+    with open(html_file, 'r', encoding='utf-8') as file:
+        html_content = file.read()
+    
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(html_content, 'html.parser')
+    text = soup.get_text()
+
+    word_count = text.lower().split().count(word.lower())
+
+    return word_count
+
+word_to_count = input("Введите слово для подсчета в файле HTML: ")
+html_file_path = input("Введите путь к файлу HTML: ")
+
+count = count_word_in_html(word_to_count, html_file_path)
+print(f"Слово '{word_to_count}' встречается {count} раз(а) в файле HTML.")
